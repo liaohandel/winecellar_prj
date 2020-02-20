@@ -6,6 +6,9 @@ var fs = require('fs');
 var dbtool = require("./Access_data");
 var util = require("util")
 
+var mask_drvkey=""
+var mask_uptime=0
+
 //app.engine('jade', require('jade').__express);
 
 // 設定靜態檔案所在目錄
@@ -56,10 +59,19 @@ app.get('/upload', function (req, res) {
 		return;
 	}
     uptime = new Date();
-	uu = uptime.getTime() - (1000 *60*60)*8 //Taipe [-8h]
-	uptime = new Date(uu)
-	console.log(uptime)
-    dbtool.writeData(req.query.api_key, req.query.field1, req.query.field2, uptime);
+	console.log("##1>>",uptime)
+	unow = uptime.getTime()
+	if( (mask_drvkey == req.query.api_key) && ((unow-mask_uptime)<=(1000 *60*5)) ){
+		res.end();
+		return;
+	}else{
+		mask_drvkey=req.query.api_key;
+		mask_uptime=unow;
+	}
+	uu = unow + (1000 *60*60)*8 //Taipe [+8h]
+	xuptime = new Date(uu)
+	console.log("##2>>",xuptime)
+    dbtool.writeData(req.query.api_key, req.query.field1, req.query.field2, xuptime);
     res.end();
 });
 
