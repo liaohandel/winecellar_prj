@@ -61,8 +61,9 @@ app.get('/upload', function (req, res) {
     uptime = new Date();
 	console.log("##1>>",uptime)
 	unow = uptime.getTime()
-	if( (mask_drvkey == req.query.api_key) && ((unow-mask_uptime)<=(1000 *60*5)) ){
-		res.end();
+	if( (mask_drvkey == req.query.api_key) && ((unow-mask_uptime)<=(1000 *60*5)) ){		
+		jobj = { "success" : "false" }; 
+		res.json(jobj);
 		return;
 	}else{
 		mask_drvkey=req.query.api_key;

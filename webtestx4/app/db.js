@@ -11,7 +11,7 @@ var db = function (sql, callback) {
     connecction = mysql.createConnection({
         host: '172.17.0.2',  //'172.17.0.2','localhost'
         user: 'sur', //sur
-        password: '!@#123QWEqwe',
+        password: 'abcd1234', //'!@#82857354'
         port: 3306,
         database: 'mysql_nodejs',
         dialectOptions: {
