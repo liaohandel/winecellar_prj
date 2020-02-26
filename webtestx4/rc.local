@@ -1,0 +1,43 @@
+#!/bin/bash -e
+# THIS FILE IS ADDED FOR COMPATIBILITY PURPOSES
+#
+# It is highly advisable to create own systemd services or udev rules
+# to run scripts during boot instead of using this file.
+#
+# In contrast to previous versions due to parallel execution during boot
+# this script will NOT be run after all other services.
+#
+# Please note that you must run 'chmod +x /etc/rc.d/rc.local' to ensure
+# that this script will be executed during boot.
+
+touch /var/lock/subsys/local
+
+#sudo python /home/mysql/startdoc.py
+
+sleep 5
+
+ip add
+cd /home/app1/
+
+#python /home/app1/startdoc.py
+
+sudo sh /home/app1/rundocpm2.sh
+
+#docker exec -it node bash /data/app/runpm2.sh
+
+#docker exec -it node pm2 start /data/app/ecosystem.config.js
+
+#sh /home/app1/rundocpm2.sh
+#echo "log to /home/app1"
+
+#cd /home/app1
+#sudo python /home/app1/startdoc.py
+
+#docker exec -it node pm2 start /data/app/app2.js
+#docker exec -it node bash /data/app/runpm2.sh
+#docker exec -it node pm2 start /data/app/ecosystem.config.js
+
+#sudo sh /home/app1/rundocpm2.sh
+#cd /home/app1
+
+exit 0
